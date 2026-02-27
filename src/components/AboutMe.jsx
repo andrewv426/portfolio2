@@ -35,16 +35,6 @@ export default function AboutMe() {
                 </div>
                 {/* Mouth */}
                 <div className="absolute bottom-[4px] w-[10px] h-[1.5px] bg-[#664500] rounded-full"></div>
-
-                <style jsx>{`
-@keyframes roll - eyes {
-  0 %, 10 %, 100 % { transform: translate(0, 0); }
-  20 %, 30 % { transform: translate(0, -3px); }
-  40 %, 50 % { transform: translate(1.5px, -3px); }
-  60 %, 80 % { transform: translate(-1.5px, -3px); }
-  90 % { transform: translate(0, -3px); }
-}
-`}</style>
               </div>
             </div>
             <p className="m-0">studying cs + math @ texas a&amp;m</p>
@@ -64,6 +54,9 @@ export default function AboutMe() {
         {/* Right Column: Interactive Image Stack and Tooltips */}
         <div className="flex flex-col items-center justify-center shrink-0 mr-12 mt-12 md:mt-0 gap-8">
           <div className="relative w-40 h-40 group cursor-pointer flex items-center justify-center">
+
+            {/* Invisible Hover Bridge (prevents flickering when cursor hits the gaps between expanded images) */}
+            <div className="absolute inset-0 z-0 bg-transparent transition-all duration-400 group-hover:-inset-x-40 group-hover:-inset-y-24" />
 
             {/* Image 3 (Bottom/Right): TFT Penguin */}
             <div className="absolute z-10 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] rotate-6 translate-x-4 translate-y-3 group-hover:rotate-6 group-hover:translate-x-[130%] group-hover:translate-y-0">
