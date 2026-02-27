@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     const basicAuth = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
     const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-    const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?limit=3&time_range=short_term`;
+    const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=short_term`;
 
     try {
         // 1. Get an access token using the refresh token
