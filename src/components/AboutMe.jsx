@@ -45,7 +45,7 @@ export default function AboutMe() {
 
           {/* Free time block */}
           <div className="flex flex-col text-[16px]">
-            <p className="m-0 font-bold italic">on my free time..</p>
+            <p className="m-0 font-bold italic">away from school...</p>
             <p className="m-0">&nbsp;</p>
             <p className="m-0">i lift, play basketball, watch netflix, and occasionally play games :)</p>
           </div>
