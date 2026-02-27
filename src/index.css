@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #fef9ed;
+  --color-nav-text: #5d524b;
+  --color-body-text: #ddd6d6;
+  --color-body-text-light: #fff2f2;
+
+  --font-libre: 'Libre Baskerville', serif;
+  --font-sora: 'Sora', sans-serif;
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-redhat: 'Red Hat Display', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
