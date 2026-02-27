@@ -7,7 +7,7 @@ export default function Projects() {
       className="relative min-h-screen w-full flex items-center"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-8 py-20 flex flex-col gap-10 font-['Red_Hat_Display'] text-[24px] text-[#ddd6d6] leading-normal">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Red_Hat_Display'] text-[20px] md:text-[24px] text-[#ddd6d6] leading-normal">
 
         {/* Header */}
         <div className="flex items-center gap-3">

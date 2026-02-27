@@ -9,10 +9,10 @@ export default function AboutMe() {
       className="relative min-h-screen w-full flex items-center"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-8 py-20 flex flex-row items-center justify-between gap-8 font-['Red_Hat_Display'] text-[24px] text-[#ddd6d6] leading-normal">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col md:flex-row items-center md:justify-between gap-12 md:gap-8 font-['Red_Hat_Display'] text-[24px] text-[#ddd6d6] leading-normal mt-10 md:mt-0">
 
         {/* Left Column: Text */}
-        <div className="flex flex-col gap-14 flex-1">
+        <div className="flex flex-col gap-10 md:gap-14 flex-1 items-start w-full">
           {/* Header */}
           <div className="flex items-center gap-3">
             <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#fef9ed] font-normal tracking-tight">about me</h2>
@@ -52,14 +52,14 @@ export default function AboutMe() {
         </div>
 
         {/* Right Column: Interactive Image Stack and Tooltips */}
-        <div className="flex flex-col items-center justify-center shrink-0 mr-12 mt-12 md:mt-0 gap-8">
+        <div className="flex flex-col items-center justify-center shrink-0 w-full md:w-auto mt-8 md:mt-0 md:mr-12 gap-8">
           <div className="relative w-40 h-40 group cursor-pointer flex items-center justify-center">
 
             {/* Invisible Hover Bridge (prevents flickering when cursor hits the gaps between expanded images) */}
-            <div className="absolute inset-0 z-0 bg-transparent transition-all duration-400 group-hover:-inset-x-40 group-hover:-inset-y-24" />
+            <div className="absolute inset-0 z-0 bg-transparent transition-all duration-400 group-hover:-inset-x-24 md:group-hover:-inset-x-40 group-hover:-inset-y-24" />
 
             {/* Image 3 (Bottom/Right): TFT Penguin */}
-            <div className="absolute z-10 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] rotate-6 translate-x-4 translate-y-3 group-hover:rotate-6 group-hover:translate-x-[130%] group-hover:translate-y-0">
+            <div className="absolute z-10 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] rotate-6 translate-x-4 translate-y-3 group-hover:rotate-6 group-hover:translate-x-[90%] md:group-hover:translate-x-[130%] group-hover:translate-y-0">
               <img
                 src={penguinImg}
                 alt="TFT Penguin"
@@ -71,7 +71,7 @@ export default function AboutMe() {
             </div>
 
             {/* Image 2 (Middle/Left): Levi AOT */}
-            <div className="absolute z-20 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] -rotate-6 -translate-x-4 translate-y-2 group-hover:-rotate-6 group-hover:-translate-x-[130%] group-hover:translate-y-0">
+            <div className="absolute z-20 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] -rotate-6 -translate-x-4 translate-y-2 group-hover:-rotate-6 group-hover:-translate-x-[90%] md:group-hover:-translate-x-[130%] group-hover:translate-y-0">
               <img
                 src={aotImg}
                 alt="Levi from Attack on Titan"

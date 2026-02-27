@@ -24,8 +24,8 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'
         }`}
     >
-      <div className="mx-auto max-w-[864px] mt-6">
-        <div className="bg-[#fef9ed] h-[64px] flex items-center justify-between px-8 relative rounded-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
+      <div className="mx-auto max-w-[864px] mt-4 md:mt-6 px-4 md:px-0">
+        <div className="bg-[#fef9ed] min-h-[64px] py-4 md:py-0 md:h-[64px] flex items-center justify-between px-6 md:px-8 relative rounded-[16px] md:rounded-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
           {/* Smiley left */}
           <span className="font-['Space_Grotesk'] text-[12px] text-[#644d4d] select-none">
             :)
@@ -34,13 +34,13 @@ export default function Navbar() {
           {/* Logo center — absolute for true centering */}
           <a
             href="#landing"
-            className="absolute left-1/2 -translate-x-1/2 font-['Libre_Baskerville'] text-[24px] text-[#5d524b] leading-none no-underline"
+            className="absolute left-1/2 -translate-x-1/2 font-['Libre_Baskerville'] text-[20px] md:text-[24px] text-[#5d524b] leading-none no-underline"
           >
             AV
           </a>
 
           {/* Nav links right */}
-          <div className="flex items-center gap-[29px]">
+          <div className="flex items-center gap-[16px] md:gap-[29px]">
             <a
               href="#about"
               className="font-['Libre_Baskerville'] text-[11px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
