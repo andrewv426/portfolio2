@@ -1,16 +1,26 @@
-# React + Vite
+# Andrew Vong — Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page, fluid-scrolling portfolio built with a moody, dark aesthetic and fluid typography. The entire site features a translucent, blurred photographic backdrop and interactive micro-animations.
 
-Currently, two official plugins are available:
+## 🛠 Tech Stack
+This project uses modern web development tools:
+- **[React 19](https://react.dev/)** — UI framework (with React Hooks via Vite)
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — Utility-first CSS framework (configured natively via `@theme` in `index.css`)
+- **[Vite](https://vitejs.dev/)** — Fast ESM-based build tool and dev server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Running Locally
+To run this project on your local machine:
 
-## React Compiler
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open the application in your browser (usually defaults to `http://localhost:5173`)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Design Philosophy
+The site uses responsive fluid typography (`clamp()`), anchor-based smooth scrolling rather than a router, and leans entirely on CSS utility classes without generic components. The core container size intentionally tracks to a `max-w-[864px]` to preserve the 60% viewport composition originally mocked up in an infinite-canvas Figma file.
