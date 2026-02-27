@@ -393,10 +393,10 @@ interests lie in machine learning, infra, and healthcare tech + research!
 ```
 on my free time..
 (blank)
-i lift, play basketball, watch netflix, and occasionally play tft :)
+i lift, play basketball, watch netflix, and occasionally play games :)
 (blank)
 (blank)
-(insert images of Rockets, Attack on Titan, TFT penguin)  ← 60% opacity
+(favorite team : rockets!, show: aot, game: tft )  ← 60% opacity
 ```
 - Placeholder instruction text at `opacity-60`
 - Below it, a row of three placeholder image boxes:
@@ -422,7 +422,7 @@ i lift, play basketball, watch netflix, and occasionally play tft :)
 
 **Projects placeholder:**
 ```
-some of my favorite projects :)
+some of my favorite work :)
 to be updated soon ...  ← 60% opacity
 ```
 

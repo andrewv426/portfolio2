@@ -14,7 +14,7 @@ export default function Projects() {
 
         {/* Projects placeholder */}
         <div className="flex flex-col gap-2 text-[16px]">
-          <p className="m-0">some of my favorite projects :)</p>
+          <p className="m-0">some of my favorite work :)</p>
           <p className="m-0 opacity-60">to be updated soon ...</p>
         </div>
 

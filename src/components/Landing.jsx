@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const CYCLING_WORDS = ['learning', 'building', 'exploring', 'creating', 'growing']
+const CYCLING_WORDS = ['build', 'explore', 'have fun :)']
 
 export default function Landing() {
   const [wordIndex, setWordIndex] = useState(0)
@@ -34,15 +34,18 @@ export default function Landing() {
         </div>
 
         {/* Animated currently text */}
-        <p className="font-['Space_Grotesk'] text-[#ebd7d7] m-0" style={{ fontSize: 'clamp(13px, 1.1vw, 16px)' }}>
-          currently{' '}
+        <div
+          className="flex flex-row items-center font-['Space_Grotesk'] text-[#ebd7d7] m-0"
+          style={{ fontSize: 'clamp(13px, 1.1vw, 16px)' }}
+        >
+          <span className="w-[100px] text-right pr-1">learning to</span>
           <span
-            className="inline-block transition-opacity duration-300"
+            className="w-[120px] text-left inline-block transition-opacity duration-300"
             style={{ opacity: fade ? 1 : 0 }}
           >
             {CYCLING_WORDS[wordIndex]}
           </span>
-        </p>
+        </div>
       </div>
     </section>
   )
