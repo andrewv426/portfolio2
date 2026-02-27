@@ -51,15 +51,15 @@ export default function AboutMe() {
           </div>
         </div>
 
-        {/* Right Column: Interactive Image Stack and Tooltips */}
-        <div className="flex flex-col items-center justify-center shrink-0 w-full md:w-auto mt-8 md:mt-0 md:mr-12 gap-8">
+        {/* Right Column: Interactive Image Stack (Desktop Only) */}
+        <div className="hidden md:flex flex-col items-center justify-center shrink-0 mr-12 gap-8">
           <div className="relative w-40 h-40 group cursor-pointer flex items-center justify-center">
 
             {/* Invisible Hover Bridge (prevents flickering when cursor hits the gaps between expanded images) */}
-            <div className="absolute inset-0 z-0 bg-transparent transition-all duration-400 group-hover:-inset-x-24 md:group-hover:-inset-x-40 group-hover:-inset-y-24" />
+            <div className="absolute inset-0 z-0 bg-transparent transition-all duration-400 group-hover:-inset-x-40 group-hover:-inset-y-24" />
 
             {/* Image 3 (Bottom/Right): TFT Penguin */}
-            <div className="absolute z-10 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] rotate-6 translate-x-4 translate-y-3 group-hover:rotate-6 group-hover:translate-x-[90%] md:group-hover:translate-x-[130%] group-hover:translate-y-0">
+            <div className="absolute z-10 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] rotate-6 translate-x-4 translate-y-3 group-hover:rotate-6 group-hover:translate-x-[130%] group-hover:translate-y-0">
               <img
                 src={penguinImg}
                 alt="TFT Penguin"
@@ -71,7 +71,7 @@ export default function AboutMe() {
             </div>
 
             {/* Image 2 (Middle/Left): Levi AOT */}
-            <div className="absolute z-20 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] -rotate-6 -translate-x-4 translate-y-2 group-hover:-rotate-6 group-hover:-translate-x-[90%] md:group-hover:-translate-x-[130%] group-hover:translate-y-0">
+            <div className="absolute z-20 transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] -rotate-6 -translate-x-4 translate-y-2 group-hover:-rotate-6 group-hover:-translate-x-[130%] group-hover:translate-y-0">
               <img
                 src={aotImg}
                 alt="Levi from Attack on Titan"
@@ -94,6 +94,25 @@ export default function AboutMe() {
               </span>
             </div>
 
+          </div>
+        </div>
+
+        {/* Mobile Images Grid (Mobile Only) */}
+        <div className="flex md:hidden flex-row flex-wrap justify-center gap-6 w-full mt-2">
+          {/* Item 1 */}
+          <div className="flex flex-col items-center gap-2">
+            <img src={durantImg} alt="Kevin Durant" className="w-24 h-24 object-cover rounded-md border border-white/20 shadow-md object-top" />
+            <span className="text-[10px] text-white/70">houston rockets!</span>
+          </div>
+          {/* Item 2 */}
+          <div className="flex flex-col items-center gap-2">
+            <img src={aotImg} alt="Levi" className="w-24 h-24 object-cover rounded-md border border-white/20 shadow-md object-top" />
+            <span className="text-[10px] text-white/70">attack on titan :)</span>
+          </div>
+          {/* Item 3 */}
+          <div className="flex flex-col items-center gap-2">
+            <img src={penguinImg} alt="Penguin" className="w-24 h-24 object-cover rounded-md border border-white/20 shadow-md object-top" />
+            <span className="text-[10px] text-white/70">tft :)</span>
           </div>
         </div>
 
