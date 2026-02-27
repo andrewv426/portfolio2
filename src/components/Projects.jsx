@@ -1,3 +1,5 @@
+import TopTracks from './TopTracks'
+
 export default function Projects() {
   return (
     <section
@@ -21,7 +23,7 @@ export default function Projects() {
         {/* Spotify section */}
         <div className="flex flex-col gap-4">
           <p className="m-0">check my spotify to see what i&apos;m listening to :)</p>
-          <p className="m-0 opacity-60">(plugin to display most listened artists)</p>
+          <TopTracks />
         </div>
 
       </div>

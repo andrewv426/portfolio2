@@ -1,7 +1,6 @@
 import aotImg from '../assets/aot.jpg'
 import durantImg from '../assets/durant.webp'
 import penguinImg from '../assets/penguin.webp'
-import TopTracks from './TopTracks'
 
 export default function AboutMe() {
   return (
@@ -59,9 +58,6 @@ export default function AboutMe() {
             <p className="m-0 font-bold italic">on my free time..</p>
             <p className="m-0">&nbsp;</p>
             <p className="m-0">i lift, play basketball, watch netflix, and occasionally play games :)</p>
-
-            {/* Spotify Currently Playing / Top Tracks */}
-            <TopTracks />
           </div>
         </div>
 
