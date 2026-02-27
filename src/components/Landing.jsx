@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-const CYCLING_WORDS = ['build', 'explore', 'have fun :)']
+const CYCLING_WORDS = ['develop', 'research', 'have fun :)']
 
 export default function Landing() {
   const [wordIndex, setWordIndex] = useState(0)
