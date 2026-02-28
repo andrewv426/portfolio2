@@ -3,6 +3,7 @@ import Landing from './components/Landing'
 import AboutMe from './components/AboutMe'
 import Projects from './components/Projects'
 import sequoiaBg from './assets/sequoia-sunrise.jpg'
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App() {
   return (
@@ -22,6 +23,9 @@ export default function App() {
         <AboutMe />
         <Projects />
       </main>
+
+      {/* Vercel Page View Analytics */}
+      <Analytics />
     </div>
   )
 }
