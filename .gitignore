@@ -27,8 +27,8 @@ dist-ssr
 *.sw?
 
 # AI Agent Specific (Claude / Gemini)
-.claude/
-.gemini/
-.ai/
+.claude
+.gemini
+.ai
 .vercel
-.env*.local
+.env*.local 
