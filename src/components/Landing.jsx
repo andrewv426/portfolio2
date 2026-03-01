@@ -33,19 +33,6 @@ export default function Landing() {
           </h1>
         </div>
 
-        {/* Animated currently text */}
-        <div
-          className="flex flex-col md:flex-row items-center justify-center font-['Karla'] text-[#ebd7d7] m-0 gap-1 md:gap-0"
-          style={{ fontSize: 'clamp(13px, 1.1vw, 16px)' }}
-        >
-          <span className="w-auto md:w-[100px] text-center md:text-right md:pr-1">learning to</span>
-          <span
-            className="w-auto md:w-[120px] text-center md:text-left inline-block transition-opacity duration-300"
-            style={{ opacity: fade ? 1 : 0 }}
-          >
-            {CYCLING_WORDS[wordIndex]}
-          </span>
-        </div>
       </div>
     </section>
   )

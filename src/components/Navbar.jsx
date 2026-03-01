@@ -26,10 +26,53 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-[864px] mt-4 md:mt-6 px-4 md:px-0">
         <div className="bg-[#fef9ed] min-h-[64px] py-4 md:py-0 md:h-[64px] flex items-center justify-between px-6 md:px-8 relative rounded-[16px] md:rounded-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
-          {/* Smiley left (hidden on mobile) */}
-          <span className="font-['Space_Grotesk'] text-[12px] text-[#644d4d] select-none hidden md:inline-block">
-            :)
-          </span>
+          <div className="relative w-8 h-8 hidden md:flex items-center justify-center group cursor-default">
+            <svg
+              className="w-full h-full overflow-visible"
+              viewBox="0 0 100 100"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {/* Frog head — flared cheeks, flat bottom, smooth eye bumps */}
+              <path
+                d="M 15 55 C 8 75, 20 90, 50 90 C 80 90, 92 75, 85 55 C 82 48, 78 40, 70 36 C 64 33, 58 35, 50 38 C 42 35, 36 33, 30 36 C 22 40, 18 48, 15 55 Z"
+                stroke="#4F7955"
+                strokeWidth="7.5"
+                className="fill-transparent transition-colors duration-300"
+              />
+
+              {/* Left eye */}
+              <circle
+                cx="33" cy="46" r="4.5"
+                stroke="none"
+                className="fill-[#4F7955] transition-colors duration-300"
+              />
+              {/* Right eye */}
+              <circle
+                cx="67" cy="46" r="4.5"
+                stroke="none"
+                className="fill-[#4F7955] transition-colors duration-300"
+              />
+
+              {/* Smile - flattened wide curve */}
+              <path
+                d="M 28 65 Q 50 75 72 65"
+                strokeWidth="5"
+                className="stroke-[#4F7955] transition-colors duration-300"
+              />
+
+              {/* Tongue — bold, straighter, slightly darker pink */}
+              <path
+                d="M 52 73 Q 56 86, 68 84"
+                stroke="#e85d9e"
+                strokeWidth="14"
+                fill="none"
+                strokeLinecap="round"
+                className="opacity-0 group-hover:opacity-100 transition-all duration-300 delay-75 origin-[52px_70px] scale-0 group-hover:scale-100"
+              />
+            </svg>
+          </div>
 
           {/* Logo center (absolute on desktop, natural flow on mobile) */}
           <a
@@ -43,17 +86,17 @@ export default function Navbar() {
           <div className="flex items-center gap-[12px] md:gap-[29px]">
             <a
               href="#about"
-              className="font-['Libre_Baskerville'] text-[10px] md:text-[11px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
             >
               About
             </a>
             <a
               href="#projects"
-              className="font-['Libre_Baskerville'] text-[10px] md:text-[11px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
             >
               Projects
             </a>
-            <span className="font-['Libre_Baskerville'] text-[10px] md:text-[11px] text-[#5d524b] cursor-default">
+            <span className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] cursor-default">
               Contact
             </span>
           </div>

@@ -7,7 +7,7 @@ export default function Projects() {
       className="relative min-h-screen w-full flex items-center"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Red_Hat_Display'] text-[20px] md:text-[24px] text-[#ddd6d6] leading-normal">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#ddd6d6] leading-normal">
 
         {/* Header */}
         <div className="flex items-center gap-3">
@@ -21,7 +21,7 @@ export default function Projects() {
         </div>
 
         {/* Spotify section */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 font-['Red_Hat_Display']">
           <p className="m-0">
             <a
               href="https://open.spotify.com/user/9nxz66bpinvbvd8o7u79wsztc?si=623c997752bd4282"

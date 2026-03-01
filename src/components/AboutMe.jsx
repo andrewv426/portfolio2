@@ -9,7 +9,7 @@ export default function AboutMe() {
       className="relative min-h-screen w-full flex items-center"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col md:flex-row items-center md:justify-between gap-12 md:gap-8 font-['Red_Hat_Display'] text-[24px] text-[#ddd6d6] leading-normal mt-10 md:mt-0">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col md:flex-row items-center md:justify-between gap-12 md:gap-8 font-['Karla'] text-[24px] text-[#ddd6d6] leading-normal mt-10 md:mt-0">
 
         {/* Left Column: Text */}
         <div className="flex flex-col gap-10 md:gap-14 flex-1 items-start w-full">
@@ -38,9 +38,9 @@ export default function AboutMe() {
               </div>
             </div>
             <p className="m-0">studying cs + math @ texas a&amp;m</p>
-            <p className="m-0">incoming  @ ??</p>
+            <p className="m-0">incoming swe  @ [?]</p>
             <p className="m-0">&nbsp;</p>
-            <p className="m-0">my current interests lie in ML,  infra, and healthcare ! </p>
+            <p className="m-0">my current interests lie in ML, infra, and healthcare research! </p>
           </div>
 
           {/* Free time block */}
@@ -78,7 +78,7 @@ export default function AboutMe() {
                 className="w-28 h-28 object-cover rounded-lg border border-white/20 shadow-lg object-top peer"
               />
               <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 peer-hover:opacity-100 transition-opacity">
-                attack on titan :)
+                ?
               </span>
             </div>
 
