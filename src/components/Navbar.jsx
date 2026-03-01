@@ -86,13 +86,13 @@ export default function Navbar() {
           <div className="flex items-center gap-[12px] md:gap-[29px]">
             <a
               href="#about"
-              className="font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="relative font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover-scroll-underline"
             >
               ABOUT
             </a>
             <a
               href="#projects"
-              className="font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="relative font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover-scroll-underline"
             >
               PROJECTS
             </a>

@@ -58,3 +58,31 @@ body {
     transform: translate(0, -3px);
   }
 }
+
+@keyframes scroll-underline-anim {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -12px 0;
+  }
+}
+
+.hover-scroll-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  height: 1.5px;
+  width: 100%;
+  background-image: repeating-linear-gradient(to right, #5d524b 0, #5d524b 6px, transparent 6px, transparent 12px);
+  background-size: 12px 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hover-scroll-underline:hover::after {
+  opacity: 1;
+  animation: scroll-underline-anim 0.5s linear infinite;
+}
