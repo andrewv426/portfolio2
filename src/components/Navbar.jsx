@@ -24,7 +24,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'
         }`}
     >
-      <div className="mx-auto max-w-[864px] mt-4 md:mt-6 px-4 md:px-0">
+      <div className="mx-auto max-w-[944px] mt-4 md:mt-6 px-4 md:px-0">
         <div className="bg-[#fef9ed] min-h-[64px] py-4 md:py-0 md:h-[64px] flex items-center justify-between px-6 md:px-8 relative rounded-[16px] md:rounded-sm shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
           <div className="relative w-8 h-8 hidden md:flex items-center justify-center group cursor-default">
             <svg
@@ -86,18 +86,18 @@ export default function Navbar() {
           <div className="flex items-center gap-[12px] md:gap-[29px]">
             <a
               href="#about"
-              className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
             >
-              About
+              ABOUT
             </a>
             <a
               href="#projects"
-              className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
+              className="font-solanel text-[10px] md:text-[14px] text-[#5d524b] no-underline hover:opacity-70 transition-opacity"
             >
-              Projects
+              PROJECTS
             </a>
-            <span className="font-['Libre_Baskerville'] text-[10px] md:text-[14px] text-[#5d524b] cursor-default">
-              Contact
+            <span className="font-solanel text-[10px] md:text-[14px] text-[#5d524b] cursor-default">
+              CONNECT
             </span>
           </div>
         </div>

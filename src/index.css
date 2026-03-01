@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Solanel';
+  src: url('/src/assets/fonts/SolanelTrial-Regular-BF641d049e3399f.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme {
   --color-cream: #fef9ed;
   --color-nav-text: #5d524b;
@@ -11,6 +18,7 @@
   --font-space: 'Space Grotesk', sans-serif;
   --font-redhat: 'Red Hat Display', sans-serif;
   --font-karla: 'Karla', sans-serif;
+  --font-solanel: 'Solanel', sans-serif;
 }
 
 html {
