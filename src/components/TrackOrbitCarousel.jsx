@@ -4,6 +4,47 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 const HOVER_QUERY = '(hover: hover) and (pointer: fine)';
 
+function shouldUseDefaultNavigation(event) {
+    return (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.shiftKey
+    );
+}
+
+function isMobileDevice() {
+    if (typeof navigator === 'undefined') {
+        return false;
+    }
+
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent || '');
+}
+
+function openSpotifyAppFirst(event, track) {
+    if (shouldUseDefaultNavigation(event)) {
+        return;
+    }
+
+    if (typeof window === 'undefined') {
+        return;
+    }
+
+    if (!track.spotifyUri) {
+        return;
+    }
+
+    // Desktop should always use normal browser link behavior.
+    if (!isMobileDevice()) {
+        return;
+    }
+
+    event.preventDefault();
+    window.location.href = track.spotifyUri;
+}
+
 function AlbumTile({ track, size, highlighted }) {
     const tileShadow = highlighted
         ? 'shadow-[0_24px_54px_rgba(0,0,0,0.54)]'
@@ -165,6 +206,7 @@ export default function TrackOrbitCarousel({
                                         href={track.songUrl}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onClick={(event) => openSpotifyAppFirst(event, track)}
                                         aria-label={`Open ${track.title} by ${track.artist} on Spotify`}
                                         className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1DB954] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                                     >

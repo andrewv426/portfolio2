@@ -51,6 +51,7 @@ export default async function handler(req, res) {
             title: track.name,
             artist: track.artists.map((_artist) => _artist.name).join(', '),
             songUrl: track.external_urls.spotify,
+            spotifyUri: track.uri ?? (track.id ? `spotify:track:${track.id}` : null),
             albumImageUrl: track.album.images[0]?.url, // [0] is the largest res, we can css size it
         }));
 

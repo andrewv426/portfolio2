@@ -13,6 +13,7 @@ function normalizeTracks(rawTracks) {
             title: String(track.title),
             artist: String(track.artist),
             songUrl: String(track.songUrl),
+            spotifyUri: track.spotifyUri ? String(track.spotifyUri) : null,
             albumImageUrl: track.albumImageUrl ? String(track.albumImageUrl) : null,
         }));
 }
