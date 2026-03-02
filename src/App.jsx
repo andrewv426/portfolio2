@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Landing from './components/Landing'
-import sequoiaBg from './assets/sequoia-sunrise.jpg'
 import AboutMe from './components/AboutMe'
 import Projects from './components/Projects'
 import Spotify from './components/Spotify'
@@ -30,8 +29,8 @@ export default function App() {
       */}
       <div className="fixed inset-0 z-0 overflow-hidden">
         <motion.div
-          className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${sequoiaBg})`, scale: bgScale }}
+          className="sequoia-image-fallback absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ scale: bgScale }}
         />
         <div className="absolute inset-0 bg-black/55" />
       </div>

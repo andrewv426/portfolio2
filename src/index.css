@@ -31,6 +31,18 @@ body {
   background-color: #000;
 }
 
+.sequoia-image-fallback {
+  background-image: url('./assets/sequoia-sunrise.jpg');
+  background-image: -webkit-image-set(
+    url('./assets/sequoia-sunrise.webp') 1x,
+    url('./assets/sequoia-sunrise.jpg') 1x
+  );
+  background-image: image-set(
+    url('./assets/sequoia-sunrise.webp') type('image/webp') 1x,
+    url('./assets/sequoia-sunrise.jpg') type('image/jpeg') 1x
+  );
+}
+
 @keyframes roll-eyes {
 
   0%,

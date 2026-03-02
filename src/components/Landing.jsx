@@ -1,5 +1,3 @@
-import sequoiaBg from '../assets/sequoia-sunrise.jpg'
-
 export default function Landing() {
   return (
     <section
@@ -9,10 +7,9 @@ export default function Landing() {
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
         <h1
-          className="font-['Sora'] font-black text-center m-0 leading-[0.85] tracking-tighter w-full"
+          className="sequoia-image-fallback font-['Sora'] font-black text-center m-0 leading-[0.85] tracking-tighter w-full"
           style={{
             fontSize: 'clamp(80px, 15vw, 250px)',
-            backgroundImage: `url(${sequoiaBg})`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundPosition: 'center',
