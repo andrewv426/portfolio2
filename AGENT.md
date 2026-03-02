@@ -2,7 +2,7 @@
 
 > Exhaustive reference for any AI agent working on this codebase.
 > Contains every architectural decision, pixel value, class name, behavioral detail, and rationale.
-> Last updated: 2026-02-26
+> Last updated: 2026-03-01
 
 ---
 
@@ -10,10 +10,10 @@
 
 **Owner:** Andrew Vong
 **Type:** Personal portfolio website
-**Description:** A single-page scrolling portfolio with a moody, dark aesthetic. The entire page sits on a black background with a translucent, slightly blurred landscape photograph (Sequoia sunrise) fixed behind all content. A cream-colored floating navbar hides and reveals on scroll. The hero section displays the owner's name in large fluid typography with a cycling animated subtitle. Subsequent sections present biographical text and project placeholders.
+**Description:** A single-page scrolling portfolio with a moody, dark aesthetic featuring a sophisticated **3-stage parallax scroll animation system** built with Framer Motion. A beige landing page masks a fixed forest background (Sequoia sunrise). As the user scrolls, the beige fades away revealing a darkened forest. Content sections (About Me → Projects → Spotify) are presented via a chain-reaction of overlapping slide-up crossfades: each section physically slides up from the bottom of the screen as the previous one fades out, pinning in the center before dissolving into the next. A cream-colored floating navbar hides and reveals on scroll.
 
-**URL (dev):** `http://localhost:5173`
-**Deployment:** Not yet deployed. No CI/CD configured. `dist/` folder exists from a previous build.
+**URL (dev):** `http://localhost:5173` (or `http://localhost:5173/?option=3` for the current active animation)
+**Deployment:** Deployed via **Vercel** with `@vercel/analytics`.
 
 ---
 
@@ -31,12 +31,16 @@
 | ESLint Plugins | `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh` | `^7.0.1`, `^0.4.24` | |
 | Globals | `globals` | `^16.5.0` | Browser globals for ESLint |
 | Type Definitions | `@types/react`, `@types/react-dom` | `^19.2.7`, `^19.2.3` | Present in devDeps but project uses .jsx not .tsx |
+| Animation | `framer-motion` | `^12.x` | Scroll-driven animations (`useScroll`, `useTransform`, `motion.div`) for parallax and section transitions |
+| Analytics | `@vercel/analytics` | `^1.x` | Vercel web analytics integration |
 
 **Critical:** This project uses **Tailwind CSS v4**. There is NO `tailwind.config.js` file. Theme customization is done via the `@theme {}` CSS directive in `src/index.css`. Do not create a `tailwind.config.js` — it will be ignored.
 
 **No TypeScript.** All source files are `.jsx`. The `@types/*` packages are present from the Vite scaffold but unused.
 
 **No router.** No `react-router-dom` or any routing library. Navigation is anchor-based (`#landing`, `#about`, `#projects`) with `scroll-behavior: smooth` on `<html>`.
+
+**Framer Motion** is heavily used for scroll-driven parallax transitions. The `useScroll` and `useTransform` hooks drive opacity, scale, and positioning of content sections based on scroll progress.
 
 ---
 
@@ -45,29 +49,36 @@
 ```
 portfolio2/
 ├── .claude/                    # Claude Code project config (auto-generated)
-├── .gitignore                  # Standard Vite gitignore (node_modules, dist, logs, editor files)
+├── .gemini/                    # Gemini agent config (auto-generated)
+├── .gitignore                  # Standard Vite gitignore + AI agent dirs
 ├── AGENT.md                    # THIS FILE — agent context document
-├── README.md                   # Default Vite scaffold README (not customized)
-├── dist/                       # Previous production build output (gitignored)
-├── eslint.config.js            # ESLint flat config — JS/JSX, react-hooks, react-refresh
-├── index.html                  # Vite entry point — Google Fonts, viewport meta, Figma capture script
+├── README.md                   # Default Vite scaffold README
+├── api/                        # Vercel serverless functions
+│   └── spotify.js              # Spotify API proxy (Top Tracks)
+├── dist/                       # Production build output (gitignored)
+├── eslint.config.js            # ESLint flat config
+├── index.html                  # Vite entry point — Google Fonts, viewport meta
 ├── node_modules/               # Dependencies (gitignored)
 ├── package.json                # Project manifest
 ├── package-lock.json           # Lockfile
 ├── public/
-│   └── vite.svg                # Default Vite favicon (1497 bytes) — should be replaced
+│   └── favicon.ico             # Custom hand-drawn smiley face favicon
 ├── src/
 │   ├── main.jsx                # Entry: StrictMode > App, mounted to #root
-│   ├── App.jsx                 # Root component: fixed bg image + Navbar + main sections
-│   ├── index.css               # @import "tailwindcss" + @theme tokens + global body styles
+│   ├── App.jsx                 # Root: parallax bg layers + Navbar + main sections
+│   ├── index.css               # @import "tailwindcss" + @theme tokens + animations
 │   ├── assets/
-│   │   ├── react.svg           # Default Vite scaffold asset (4126 bytes, unused)
-│   │   └── sequoia-sunrise.jpg # Background photo (9,023,538 bytes / ~8.6 MB, 3840x2160)
+│   │   ├── aot.jpg             # Attack on Titan (Levi) image for AboutMe
+│   │   ├── durant.webp         # Kevin Durant / Rockets image for AboutMe
+│   │   ├── penguin.webp        # TFT Penguin image for AboutMe
+│   │   └── sequoia-sunrise.jpg # Background photo (3840x2160, ~8.6 MB)
 │   └── components/
 │       ├── Navbar.jsx           # Fixed floating nav, scroll-reactive show/hide
-│       ├── Landing.jsx          # Hero: fluid "ANDREW VONG" + cycling "currently {word}"
-│       ├── AboutMe.jsx          # Bio text blocks + placeholder image row
-│       └── Projects.jsx         # Project + Spotify placeholders
+│       ├── Landing.jsx          # Hero: fluid "ANDREW VONG" + cycling subtitle
+│       ├── AboutMe.jsx          # 250vh pinned scroll section with interactive image stack
+│       ├── Projects.jsx         # 250vh pinned scroll section, slides up over AboutMe
+│       ├── Spotify.jsx          # Slide-up footer section with TopTracks
+│       └── TopTracks.jsx        # Spotify API-driven "on repeat" track list
 └── vite.config.js              # defineConfig: [react(), tailwindcss()]
 ```
 
@@ -177,8 +188,12 @@ Red Hat Display: 400, 500
 
 | Layer | Z-Index | Element |
 |---|---|---|
-| Background image | `z-0` | Fixed `<div>` wrapping the `<img>` in App.jsx |
-| Main content | `z-10` | `<main>` wrapping Landing, AboutMe, Projects |
+| Background image + dark overlay | `z-0` | Fixed `<div>` with `<motion.div>` bg image + `bg-black/55` overlay in App.jsx |
+| Beige mask | `z-[2]` | `<motion.div>` that fades to reveal forest (App.jsx) |
+| Main content wrapper | `z-10` | `<div ref={mainRef}>` wrapping all sections |
+| AboutMe section | `z-10` | `h-[250vh]` pinned scroll section |
+| Projects section | `z-20` | `h-[250vh]` pinned scroll section, overlaps AboutMe via `-mt-[100vh]` |
+| Spotify section | `z-30` | Slide-up footer, overlaps Projects via `-mt-[100vh]` |
 | Navbar | `z-50` | The `<nav>` element |
 
 ---
@@ -199,31 +214,42 @@ createRoot(document.getElementById('root')).render(
 
 ### 6.2 `src/App.jsx`
 
-**Imports:** `Navbar`, `Landing`, `AboutMe`, `Projects`, `sequoiaBg` (jpg asset)
+**Imports:** `Navbar`, `Landing`, `AboutMe`, `Projects`, `Spotify`, `sequoiaBg`, `Analytics`, `motion`, `useScroll`, `useTransform`, `useRef`
 
-**Structure:**
+**Architecture: 3-Layer Parallax System**
+
+The app uses a fixed 3-layer background system with Framer Motion scroll-driven animations:
+
 ```
-<div className="relative bg-black min-h-screen">
-  <div className="fixed inset-0 z-0">           ← background layer
-    <img src={sequoiaBg} ... />                   ← the sunrise photo
-  </div>
-  <Navbar />                                      ← outside <main>, fixed position
-  <main className="relative z-10">                ← content above background
-    <Landing />
-    <AboutMe />
-    <Projects />
-  </main>
+<div className="relative min-h-screen w-full">
+  LAYER 1: Fixed background (forest + dark overlay)
+    <div className="fixed inset-0 z-0 overflow-hidden">
+      <motion.div style={{ backgroundImage, scale: bgScale }} />  ← scales from 1.1 to 1
+      <div className="bg-black/55" />                              ← permanent dark overlay
+    </div>
+
+  LAYER 2: Beige mask (fades out on scroll)
+    <motion.div className="fixed z-[2] bg-[#fef9ed]" style={{ opacity: beigeOpacity }} />
+
+  LAYER 3: Content
+    <div className="relative z-10" ref={mainRef}>
+      <Navbar />
+      <main>
+        <Landing />    ← h-screen, normal flow
+        <AboutMe />    ← h-[250vh], pinned scroll, z-10
+        <Projects />   ← h-[250vh], -mt-[100vh], z-20 (slides up over AboutMe)
+        <Spotify />    ← min-h-[100vh], -mt-[100vh], z-30 (slides up over Projects)
+      </main>
+      <Analytics />
+    </div>
 </div>
 ```
 
-**Background image classes (on `<img>`):**
-- `w-full h-full` — fills the fixed container
-- `object-cover` — covers without distortion, crops edges
-- `opacity-40` — 40% opacity over the black background, creating a dark moody overlay
-- `blur-[0.75px]` — very subtle blur to soften the photo
-- `pointer-events-none select-none` — non-interactive, non-selectable
+**Scroll-driven values:**
+- `bgScale`: `scrollYProgress [0, 0.1]` → `[1.1, 1]` — forest zooms in slightly as you leave Landing
+- `beigeOpacity`: `scrollYProgress [0, 0.1]` → `[1, 0]` — beige mask vanishes immediately, revealing forest
 
-**Why `<img>` instead of CSS `background-image`?** Tailwind utility classes (`opacity-40`, `blur-[0.75px]`) work directly on elements. With `background-image` you'd need pseudo-elements or extra wrappers to achieve the same blur + opacity effect.
+**The beige mask color is `#fef9ed`** — slightly lighter than the navbar background to create a seamless look on the landing page.
 
 ### 6.3 `src/components/Navbar.jsx`
 
@@ -358,80 +384,72 @@ Every 2200ms:
 
 ### 6.5 `src/components/AboutMe.jsx`
 
-**No state.** Pure presentational component.
+**State:** `sectionRef` (useRef), `scrollYProgress` (useScroll)
 
-**Section wrapper:**
-```html
-<section id="about" className="relative min-h-screen w-full flex items-center">
-```
-- `min-h-screen` (not `h-screen`) — allows content to exceed viewport height if needed
-- `flex items-center` — vertically centers content within the section
-- No `justify-center` — content aligns left within the centered max-width container
+**Scroll Animation Architecture:**
+- **Section height:** `h-[250vh]` — creates a 250vh tall scrollable track
+- **Sticky container:** `sticky top-0 h-screen` — pins content to viewport center
+- **Scroll tracking:** `useScroll({ target: sectionRef, offset: ["start start", "end end"] })`
+- **Opacity:** `useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0])`
+  - Fades in over 60vh, holds solid for 30vh, fades out over 60vh
+- **Scale:** Same keyframes, `[0.95, 1, 1, 0.95]` — subtle scale-up on entrance
 
-**Content container:**
-```html
-<div className="relative z-10 w-full max-w-[864px] mx-auto px-8 py-20 flex flex-col gap-14 font-['Red_Hat_Display'] text-[24px] text-[#ddd6d6] leading-normal">
-```
-- `max-w-[864px] mx-auto` — matches navbar width, centered
-- `px-8` (32px) side padding, `py-20` (80px) top/bottom padding
-- `gap-14` (56px) between the two text blocks
-- All text inherits: Red Hat Display, 24px, `#ddd6d6`, normal line height
+**Layout:** Two-column on desktop (text left, image stack right), single column on mobile.
 
-**Academic block:**
-```
-academically.. (nerd emoji)
-studying cs + math @ Texas A&M
-incoming swe intern @ ?
-(blank line)
-interests lie in machine learning, infra, and healthcare tech + research!
-```
-- Each line is a `<p className="m-0">` (margin removed to control spacing via parent gap)
-- `&amp;` renders as `&` for "Texas A&M"
-- Blank line achieved with `<p className="m-0">&nbsp;</p>`
+**Interactive Image Stack (Desktop):**
+- 3 stacked images (KD/Rockets, Levi/AoT, Penguin/TFT) with hover-to-fan-out animation
+- Uses `group-hover` transforms with cubic-bezier easing for a spring effect
+- Tooltip labels appear on individual image hover via `peer`/`peer-hover`
 
-**Free time block:**
-```
-on my free time..
-(blank)
-i lift, play basketball, watch netflix, and occasionally play games :)
-(blank)
-(blank)
-(favorite team : rockets!, show: aot, game: tft )  ← 60% opacity
-```
-- Placeholder instruction text at `opacity-60`
-- Below it, a row of three placeholder image boxes:
+**Mobile Images Grid:** Simple flex-wrap row with labels below each image.
 
-**Placeholder image boxes:**
-```html
-<div className="flex gap-4 mt-4">
-  <div className="w-24 h-24 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center">
-    <span className="text-xs text-center opacity-60">Rockets</span>
-  </div>
-  <!-- same for AoT, TFT -->
-</div>
-```
-- 96×96px (`w-24 h-24`), rounded corners (`rounded-lg`), semi-transparent white bg + border
-- Label text: `text-xs` (12px), centered, 60% opacity
-- **These are placeholders** — need to be replaced with actual images (Houston Rockets, Attack on Titan, TFT penguin)
+**Font:** `Karla` for body, `Libre Baskerville` for the "about me" heading.
 
 ### 6.6 `src/components/Projects.jsx`
 
-**No state.** Pure presentational component. Same structural pattern as AboutMe.
+**State:** `sectionRef` (useRef), `scrollYProgress` (useScroll)
 
-**Content container:** Same as AboutMe but `gap-10` (40px) instead of `gap-14`
+**Scroll Animation Architecture:**
+- **Section height:** `h-[250vh]` with **`-mt-[100vh]`** — pulled up to overlap the final 100vh of AboutMe's fade-out
+- **Z-index:** `z-20` — renders above AboutMe's `z-10`
+- **Scroll tracking:** `useScroll({ target: sectionRef, offset: ["start end", "end end"] })`
+  - Uses `"start end"` because the section enters from the bottom of the viewport
+- **Opacity:** `useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0, 1, 1, 0])`
+  - Slide-up entrance over first 100vh (0→0.28), hold solid ~155vh, fade out last 100vh
+- **Scale:** Same keyframes, `[0.95, 1, 1, 0.95]`
 
-**Projects placeholder:**
-```
-some of my favorite work :)
-to be updated soon ...  ← 60% opacity
-```
+**Content:** Header ("projects") + placeholder text. Same 864px max-width container.
 
-**Spotify placeholder:**
-```
-check my spotify to see what i'm listening to :)
-(plugin to display most listened artists)  ← 60% opacity
-```
-- `&apos;` used for the apostrophe in "i'm"
+### 6.7 `src/components/Spotify.jsx`
+
+**State:** `sectionRef` (useRef), `scrollYProgress` (useScroll)
+
+**Scroll Animation Architecture:**
+- **Section height:** `min-h-[100vh]` with **`-mt-[100vh]`** — pulled up to overlap the final 100vh of Projects' fade-out
+- **Z-index:** `z-30` — renders above Projects' `z-20`
+- **Scroll tracking:** `useScroll({ target: sectionRef, offset: ["start 100%", "start 0%"] })`
+- **Opacity:** `useTransform(scrollYProgress, [0, 1], [0, 1])` — simple linear fade-in
+- **Scale:** `useTransform(scrollYProgress, [0, 1], [0.95, 1])`
+- **Key difference from AboutMe/Projects:** No fade-out phase. Spotify is the final section and remains fully visible once it arrives. It scrolls normally (not pinned) so users can interact with the TopTracks list.
+
+**Content:** 
+- "spotify" heading (Libre Baskerville)
+- "follow me!" link to Spotify profile with hover color change to `#1DB954`
+- `<TopTracks />` component showing recently played tracks
+
+### 6.8 `src/components/TopTracks.jsx`
+
+**State:** `tracks` (array), `loading` (boolean)
+
+**Data fetching:** Calls `/api/spotify` on mount to get top tracks from the Vercel serverless function.
+
+**Rendering:**
+- Loading state: Animated pulse placeholder
+- Empty state: Returns null
+- Loaded: Displays up to 3 tracks with album art, title, and artist name
+- Each track links to its Spotify URL
+- Hover effects: `bg-black/5` background, album art scales up 5%
+- Track text color: `#5d524b` (nav text color) — stands out against the dark forest bg
 
 ---
 
@@ -544,8 +562,13 @@ Standard Vite gitignore: `node_modules`, `dist`, `dist-ssr`, `*.local`, logs, ed
 - `html { scroll-behavior: smooth }` — all anchor navigation is animated
 - Navbar hides with a 300ms slide-up when scrolling down
 - Navbar reappears with a 300ms slide-down when scrolling up (even slightly)
-- The scroll detection compares current vs previous scroll position — any upward movement triggers show, any downward triggers hide
-- **Edge case:** At the very top of the page (scrollY = 0), the navbar is always visible because the initial state is `visible: true` and scrolling up from near-top triggers the show condition
+
+**Parallax Scroll Sequence (Option 3: Blur & Scale):**
+1. **Landing → Forest:** Beige mask fades to 0 in the first 10% of total page scroll, revealing darkened forest with a subtle zoom-in
+2. **Forest → AboutMe:** AboutMe pins to center, fades in over 60vh, holds solid 30vh, fades out 60vh
+3. **AboutMe → Projects:** Projects slides up from screen bottom exactly as AboutMe fades out (overlapping via `-mt-[100vh]`)
+4. **Projects → Spotify:** Spotify slides up from screen bottom exactly as Projects fades out (overlapping via `-mt-[100vh]`)
+5. **Spotify:** Arrives at center, remains fully visible, content scrolls normally from this point
 
 ### Anchor Navigation
 - Clicking "AV" logo → scrolls to `#landing` (top of page)
@@ -604,6 +627,10 @@ Standard Vite gitignore: `node_modules`, `dist`, `dist-ssr`, `*.local`, logs, ed
 | Tailwind config | `tailwind.config.js` (v3) vs `@theme {}` (v4) | **`@theme {}` in CSS** | Project uses Tailwind v4 which uses CSS-first configuration. No JS config file. |
 | Smooth scroll | JS `scrollIntoView` vs CSS `scroll-behavior` | **CSS** `scroll-behavior: smooth` | Zero-JS solution, works with standard anchor links, browser-native performance. |
 | Word animation | CSS animation keyframes vs React state + setTimeout | **React state** | Gives programmatic control over word sequence, easy to modify words/timing, opacity transition via CSS. |
+| Parallax system | CSS-only parallax vs Framer Motion scroll-driven | **Framer Motion `useScroll` + `useTransform`** | Provides precise mathematical control over opacity/scale keyframes tied to exact scroll percentages. CSS-only parallax can't achieve the pinned fade-in/fade-out sequence. |
+| Section overlap technique | Gap between sections vs negative margins | **`-mt-[100vh]` negative margins** | Creates a seamless crossfade where the next section physically slides up while the previous one fades out, with no visible gap of empty forest between them. |
+| Beige-to-forest transition | Opacity fade on `<img>` vs mask layer | **Separate `<motion.div>` mask** | A dedicated beige mask div avoids the "brightness flash" bug that occurred when fading opacity on the background image directly. The mask sits at `z-[2]` between the background and content. |
+| Spotify section behavior | Pinned like others vs normal scroll | **Normal scroll with fade-in** | Spotify is the final section and contains interactive content (track links). Pinning would fight with the need to scroll through tracks. Instead it slides up, fades in, and then becomes a normal scrollable footer. |
 
 ---
 

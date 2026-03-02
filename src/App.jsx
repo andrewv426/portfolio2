@@ -3,6 +3,7 @@ import Landing from './components/Landing'
 import sequoiaBg from './assets/sequoia-sunrise.jpg'
 import AboutMe from './components/AboutMe'
 import Projects from './components/Projects'
+import Spotify from './components/Spotify'
 import { Analytics } from '@vercel/analytics/react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
@@ -14,11 +15,12 @@ export default function App() {
     offset: ["start start", "end end"]
   })
 
-  // Option 3: Blur & Scale
-  // The forest background starts slightly zoomed in (1.1x) and scales down to normal (1x).
-  // At the same time, the beige mask fades away to reveal it.
-  const bgScale = useTransform(scrollYProgress, [0.15, 0.4], [1.1, 1])
-  const beigeOpacity = useTransform(scrollYProgress, [0.15, 0.4], [1, 0])
+  // Option 3: Blur & Scale (Perfected Sequence)
+  // The total page height is now massive because AboutMe is 300vh tall.
+  // We want the beige mask to fade away *immediately* as the user leaves the Landing page,
+  // so the forest is fully revealed before the About Me text even begins to fade in.  
+  const bgScale = useTransform(scrollYProgress, [0, 0.1], [1.1, 1])
+  const beigeOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0])
 
   return (
     <div className="relative min-h-screen w-full">
@@ -50,6 +52,7 @@ export default function App() {
           <Landing />
           <AboutMe />
           <Projects />
+          <Spotify />
         </main>
 
         <Analytics />
