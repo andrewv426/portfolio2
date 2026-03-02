@@ -5,13 +5,11 @@ import { useRef } from 'react'
 export default function Spotify() {
     const sectionRef = useRef(null)
 
-    // Track the section's intersection with the viewport.
-    // Using pure math overlapping here: Spotify starts at the bottom precisely 
-    // as Projects begins to fade. It reaches full opacity exactly at the center. 
-    // Matches exactly the last 100vh of Projects' fade-out, which begins exactly when Spotify hits bottom.
+    // Spotify fades in as soon as it enters, and reaches full visibility when its
+    // top edge hits the viewport center. This keeps the handoff with Projects tighter.
     const { scrollYProgress } = useScroll({
         target: sectionRef,
-        offset: ["start 100%", "start 0%"]
+        offset: ["start 100%", "start 50%"]
     })
 
     const contentOpacity = useTransform(scrollYProgress, [0, 1], [0, 1])
@@ -25,16 +23,14 @@ export default function Spotify() {
         >
             <motion.div
                 style={{ opacity: contentOpacity, scale: contentScale }}
-                className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#fef9ed] leading-normal drop-shadow-md"
+                className="relative z-10 w-full min-h-[100vh] max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#fef9ed] leading-normal drop-shadow-md"
             >
-
-                {/* Header */}
-                <div className="flex items-center gap-3">
-                    <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#fef9ed] font-normal tracking-tight lowercase drop-shadow-lg">spotify</h2>
-                </div>
-
-                {/* Spotify section */}
                 <div className="flex flex-col gap-4 font-['Red_Hat_Display']">
+                    {/* Header */}
+                    <div className="flex items-center gap-3">
+                        <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#fef9ed] font-normal tracking-tight lowercase drop-shadow-lg">spotify</h2>
+                    </div>
+
                     <p className="m-0 lowercase">
                         <a
                             href="https://open.spotify.com/user/9nxz66bpinvbvd8o7u79wsztc?si=623c997752bd4282"
@@ -48,9 +44,11 @@ export default function Spotify() {
                             </svg>
                         </a>
                     </p>
-                    <TopTracks />
                 </div>
 
+                <div className="mt-auto pt-8">
+                    <TopTracks />
+                </div>
             </motion.div>
         </section>
     )

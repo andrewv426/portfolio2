@@ -5,14 +5,15 @@ export default function Projects() {
   const sectionRef = useRef(null)
 
   // 250vh element + offset ["start end", "end end"] = 350vh tracked scroll.
-  // Slide up over first 100vh (0→0.28), hold solid ~155vh (0.28→0.72), fade out last 100vh (0.72→1).
+  // Slide up over first 100vh (0→0.28), hold solid ~155vh (0.28→0.72),
+  // then fade out faster so Projects is fully gone by the time Spotify reaches center.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end end"]
   })
 
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0, 1, 1, 0])
-  const contentScale = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.95, 1, 1, 0.95])
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 0.86, 1], [0, 1, 1, 0, 0])
+  const contentScale = useTransform(scrollYProgress, [0, 0.28, 0.72, 0.86, 1], [0.95, 1, 1, 0.95, 0.95])
 
   return (
     <section
