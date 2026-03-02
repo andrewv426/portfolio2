@@ -1,38 +1,29 @@
-import { useEffect, useState } from 'react'
-
-const CYCLING_WORDS = ['develop', 'research', 'have fun :)']
+import sequoiaBg from '../assets/sequoia-sunrise.jpg'
 
 export default function Landing() {
-  const [wordIndex, setWordIndex] = useState(0)
-  const [fade, setFade] = useState(true)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFade(false)
-      setTimeout(() => {
-        setWordIndex((i) => (i + 1) % CYCLING_WORDS.length)
-        setFade(true)
-      }, 300)
-    }, 2200)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
     <section
       id="landing"
-      className="relative h-screen w-full flex items-center justify-center"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden"
     >
       {/* Hero content */}
-      <div className="relative z-10 flex flex-col items-center gap-4">
-        <div className="flex flex-col items-center leading-tight">
-          <h1 className="font-['Sora'] font-bold text-[#fff2f2] m-0 leading-none" style={{ fontSize: 'clamp(48px, 7vw, 108px)' }}>
-            ANDREW
-          </h1>
-          <h1 className="font-['Sora'] font-bold text-[#fff5f5] m-0 leading-none" style={{ fontSize: 'clamp(48px, 7vw, 108px)' }}>
-            VONG
-          </h1>
-        </div>
-
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4">
+        <h1
+          className="font-['Sora'] font-black text-center m-0 leading-[0.85] tracking-tighter w-full"
+          style={{
+            fontSize: 'clamp(80px, 15vw, 250px)',
+            backgroundImage: `url(${sequoiaBg})`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed',
+            // Fallback for mobile/safari if fixed attachment acts weird
+          }}
+        >
+          <span className="block max-sm:bg-scroll max-sm:bg-[#5d524b] max-sm:[-webkit-text-fill-color:initial] max-sm:[-webkit-background-clip:initial] max-sm:bg-none">ANDREW</span>
+          <span className="block max-sm:bg-scroll max-sm:bg-[#5d524b] max-sm:[-webkit-text-fill-color:initial] max-sm:[-webkit-background-clip:initial] max-sm:bg-none">VONG</span>
+        </h1>
       </div>
     </section>
   )

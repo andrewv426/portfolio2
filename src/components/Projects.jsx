@@ -4,25 +4,25 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="relative min-h-screen w-full flex items-center"
+      className="relative min-h-screen w-full flex items-center mb-32"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#ddd6d6] leading-normal">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#5d524b] leading-normal">
 
         {/* Header */}
         <div className="flex items-center gap-3">
-          <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#fef9ed] font-normal tracking-tight">projects</h2>
+          <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#5d524b] font-normal tracking-tight lowercase">projects</h2>
         </div>
 
         {/* Projects placeholder */}
         <div className="flex flex-col gap-2 text-[16px]">
-          <p className="m-0">some of my favorite work :)</p>
-          <p className="m-0 opacity-60">to be updated soon ...</p>
+          <p className="m-0 lowercase">some of my favorite work :)</p>
+          <p className="m-0 opacity-60 lowercase">to be updated soon ...</p>
         </div>
 
         {/* Spotify section */}
-        <div className="flex flex-col gap-4 font-['Red_Hat_Display']">
-          <p className="m-0">
+        <div className="flex flex-col gap-4 font-['Red_Hat_Display'] mt-8">
+          <p className="m-0 lowercase">
             <a
               href="https://open.spotify.com/user/9nxz66bpinvbvd8o7u79wsztc?si=623c997752bd4282"
               target="_blank"
