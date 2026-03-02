@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 export default function Navbar() {
   const [visible, setVisible] = useState(true)
   const lastScrollY = useRef(0)
+  const SCROLL_DELTA_THRESHOLD = 4
 
   const scrollToLanding = (event) => {
     event.preventDefault()
@@ -43,7 +44,21 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-      if (currentScrollY < lastScrollY.current) {
+      const delta = currentScrollY - lastScrollY.current
+
+      // Always show navbar at very top, especially for iOS bounce/elastic scroll.
+      if (currentScrollY <= 0) {
+        setVisible(true)
+        lastScrollY.current = 0
+        return
+      }
+
+      // Ignore tiny direction noise to prevent flickering.
+      if (Math.abs(delta) < SCROLL_DELTA_THRESHOLD) {
+        return
+      }
+
+      if (delta < 0) {
         setVisible(true)
       } else {
         setVisible(false)

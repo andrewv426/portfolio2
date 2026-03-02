@@ -43,6 +43,16 @@ body {
   );
 }
 
+@media (max-width: 640px) {
+  .landing-mobile-fallback {
+    background-image: none;
+    -webkit-background-clip: initial;
+    background-clip: border-box;
+    -webkit-text-fill-color: #5d524b;
+    color: #5d524b;
+  }
+}
+
 @keyframes roll-eyes {
 
   0%,
