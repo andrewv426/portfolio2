@@ -45,11 +45,11 @@ body {
 
 @media (max-width: 640px) {
   .landing-mobile-fallback {
-    background-image: none;
-    -webkit-background-clip: initial;
-    background-clip: border-box;
-    -webkit-text-fill-color: #5d524b;
-    color: #5d524b;
+    background-image: none !important;
+    -webkit-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-text-fill-color: #5d524b !important;
+    color: #5d524b !important;
   }
 }
 
