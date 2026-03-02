@@ -7,11 +7,11 @@ export default function Projects() {
       className="relative min-h-screen w-full flex items-center mb-32"
     >
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#5d524b] leading-normal">
+      <div className="relative z-10 w-full max-w-[864px] mx-auto px-4 md:px-8 py-20 flex flex-col gap-10 font-['Karla'] text-[20px] md:text-[24px] text-[#fef9ed] leading-normal drop-shadow-md">
 
         {/* Header */}
         <div className="flex items-center gap-3">
-          <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#5d524b] font-normal tracking-tight lowercase">projects</h2>
+          <h2 className="m-0 font-['Libre_Baskerville'] text-[40px] text-[#fef9ed] font-normal tracking-tight lowercase drop-shadow-lg">projects</h2>
         </div>
 
         {/* Projects placeholder */}
