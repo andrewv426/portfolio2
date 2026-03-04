@@ -32,3 +32,6 @@ dist-ssr
 .ai
 .vercel
 .env*.local 
+
+#md files
+AGENT.md

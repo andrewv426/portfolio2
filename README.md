@@ -1,26 +1,36 @@
 # Andrew Vong — Personal Portfolio
 
-A single-page, fluid-scrolling portfolio built with a moody, dark aesthetic and fluid typography. The entire site features a translucent, blurred photographic backdrop and interactive micro-animations.
+A single-page, fluid-scrolling portfolio built with a dark aesthetic and micro-animations throughout. Features a translucent blurred photographic backdrop and a live Spotify integration.
 
-## 🛠 Tech Stack
-This project uses modern web development tools:
-- **[React 19](https://react.dev/)** — UI framework (with React Hooks via Vite)
-- **[Tailwind CSS v4](https://tailwindcss.com/)** — Utility-first CSS framework (configured natively via `@theme` in `index.css`)
-- **[Vite](https://vitejs.dev/)** — Fast ESM-based build tool and dev server
+## Tech Stack
 
-## 🚀 Running Locally
-To run this project on your local machine:
+- [React 19](https://react.dev/) — UI framework with hooks, built and served via Vite
+- [Tailwind CSS v4](https://tailwindcss.com/) — utility-first CSS, configured via `@theme` in `index.css`
+- [Vite](https://vitejs.dev/) — dev server and build tool
+- [Framer Motion](https://www.framer.com/motion/) — scroll-driven animations and transitions
+- [Vercel](https://vercel.com/) — hosting and serverless API functions
+
+## Running Locally
 
 1. Clone the repository
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start the development server:
-   ```bash
-   npm run dev
+3. Add a `.env.local` file with your Spotify credentials:
    ```
-4. Open the application in your browser (usually defaults to `http://localhost:5173`)
+   SPOTIFY_CLIENT_ID=...
+   SPOTIFY_CLIENT_SECRET=...
+   SPOTIFY_REFRESH_TOKEN=...
+   ```
+4. Start the dev server (Vercel CLI required for the Spotify API route):
+   ```bash
+   vercel dev
+   ```
+5. Open `http://localhost:3000` in your browser
 
-## ✨ Design Philosophy
-The site uses responsive fluid typography (`clamp()`), anchor-based smooth scrolling rather than a router, and leans entirely on CSS utility classes without generic components. The core container size intentionally tracks to a `max-w-[864px]` to preserve the 60% viewport composition originally mocked up in an infinite-canvas Figma file.
+## Notes
+
+- The Spotify section calls `/api/spotify`, a serverless function that fetches your top tracks using the [Spotify Web API](https://developer.spotify.com/documentation/web-api). It requires OAuth credentials obtained via the Authorization Code flow.
+- Layout is constrained to `max-w-[864px]` to preserve the composition from the original Figma mockup.
+- Responsive typography uses `clamp()` throughout; navigation uses anchor-based smooth scrolling rather than a client-side router.
