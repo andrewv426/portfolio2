@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
     const basicAuth = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
     const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-    const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?limit=8&time_range=long_term`;
+    const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played?limit=8`;
 
     try {
         // 1. Get an access token using the refresh token
@@ -47,13 +47,21 @@ export default async function handler(req, res) {
         }
 
         // 3. Map the enormous Spotify payload down to just what we need for the UI
-        const tracks = tracksData.items.map((track) => ({
+        const seen = new Set();
+        const tracks = tracksData.items
+        .filter(({ track }) => {
+            if (seen.has(track.id)) return false;
+            seen.add(track.id);
+            return true;
+        })
+        .map(({ track }) => ({
             title: track.name,
             artist: track.artists.map((_artist) => _artist.name).join(', '),
             songUrl: track.external_urls.spotify,
             spotifyUri: track.uri ?? (track.id ? `spotify:track:${track.id}` : null),
-            albumImageUrl: track.album.images[0]?.url, // [0] is the largest res, we can css size it
-        }));
+            albumImageUrl: track.album.images[0]?.url,
+        }))
+        .slice(0, 8);
 
         // Add strong caching headers (cache data for 2 hours)
         res.setHeader('Cache-Control', 'public, s-maxage=7200, stale-while-revalidate=3600');

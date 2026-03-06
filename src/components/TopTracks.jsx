@@ -65,7 +65,7 @@ export default function TopTracks() {
     return (
         <div className="w-full max-w-[560px] mx-auto flex flex-col items-center gap-4">
             <p className="m-0 text-[12px] md:text-[14px] tracking-[0.08em] text-[#fef9ed]/80 lowercase text-center">
-                my all-time top played songs
+                my recently played songs
             </p>
             <TrackOrbitCarousel tracks={tracks} />
         </div>
